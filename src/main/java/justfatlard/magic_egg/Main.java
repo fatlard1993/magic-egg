@@ -1,15 +1,19 @@
 package justfatlard.magic_egg;
 
+import eu.pb4.polymer.core.api.entity.PolymerEntityUtils;
+import eu.pb4.polymer.core.api.item.PolymerItemGroupUtils;
+import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class Main implements ModInitializer {
@@ -36,14 +40,27 @@ public class Main implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		// Register mod assets with Polymer resource pack system
+		PolymerResourcePackUtils.addModAssets(MOD_ID);
+		PolymerResourcePackUtils.markAsRequired();
+
+		// Register entity and item
 		Registry.register(Registries.ENTITY_TYPE, MAGIC_EGG_ID, MAGIC_EGG_ENTITY_TYPE);
 		Registry.register(Registries.ITEM, MAGIC_EGG_ID, MAGIC_EGG_ITEM);
 
-		// Add to spawn eggs creative tab
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(content -> {
-			content.add(MAGIC_EGG_ITEM);
-		});
+		// Register entity type with Polymer for vanilla client compatibility
+		PolymerEntityUtils.registerType(MAGIC_EGG_ENTITY_TYPE);
 
-		System.out.println("[magic-egg] Loaded Magic Egg mod");
+		// Create Polymer item group (access via /polymer creative)
+		ItemGroup magicEggGroup = PolymerItemGroupUtils.builder()
+			.displayName(Text.literal("Magic Egg"))
+			.icon(() -> new ItemStack(MAGIC_EGG_ITEM))
+			.entries((context, entries) -> {
+				entries.add(new ItemStack(MAGIC_EGG_ITEM));
+			})
+			.build();
+		PolymerItemGroupUtils.registerPolymerItemGroup(Identifier.of(MOD_ID, "magic_egg"), magicEggGroup);
+
+		System.out.println("[magic-egg] Loaded Magic Egg mod (server-side with Polymer)");
 	}
 }

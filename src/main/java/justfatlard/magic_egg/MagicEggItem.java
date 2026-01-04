@@ -1,18 +1,36 @@
 package justfatlard.magic_egg;
 
+import eu.pb4.polymer.core.api.item.PolymerItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import xyz.nucleoid.packettweaker.PacketContext;
 
-public class MagicEggItem extends Item {
+public class MagicEggItem extends Item implements PolymerItem {
+	private final Identifier modelId;
+
 	public MagicEggItem(Settings settings) {
 		super(settings);
+		this.modelId = Identifier.of(Main.MOD_ID, "magic_egg");
+	}
+
+	@Override
+	public Item getPolymerItem(ItemStack itemStack, PacketContext context) {
+		// Appear as ender pearl to vanilla clients (has similar magical feel)
+		return Items.ENDER_PEARL;
+	}
+
+	@Override
+	public Identifier getPolymerItemModel(ItemStack itemStack, PacketContext context) {
+		return this.modelId;
 	}
 
 	@Override

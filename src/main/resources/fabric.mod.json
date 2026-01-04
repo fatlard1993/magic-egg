@@ -3,12 +3,12 @@
   "id": "magic-egg-justfatlard",
   "version": "${version}",
   "name": "Magic Egg",
-  "description": "A throwable egg that converts entities into spawn eggs",
+  "description": "A throwable egg that converts entities into spawn eggs (server-side with Polymer)",
   "authors": [
     "justfatlard"
   ],
   "contact": {
-    "sources": ""
+    "sources": "https://github.com/fatlard1993/magic-egg"
   },
   "license": "MIT",
   "icon": "assets/magic-egg-justfatlard/icon.png",
@@ -16,15 +16,14 @@
   "entrypoints": {
     "main": [
       "justfatlard.magic_egg.Main"
-    ],
-    "client": [
-      "justfatlard.magic_egg.ClientMain"
     ]
   },
   "depends": {
     "fabricloader": ">=0.18.0",
     "fabric-api": "*",
     "minecraft": "~1.21.11",
-    "java": ">=21"
+    "java": ">=21",
+    "polymer-core": ">=0.15.0",
+    "polymer-resource-pack": ">=0.15.0"
   }
 }

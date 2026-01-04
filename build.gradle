@@ -11,6 +11,8 @@ base {
 }
 
 repositories {
+	// Polymer library
+	maven { url 'https://maven.nucleoid.xyz' }
 }
 
 loom {
@@ -21,6 +23,11 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// Polymer for server-side items/entities
+	modImplementation include("eu.pb4:polymer-core:0.15.1+1.21.11")
+	modImplementation include("eu.pb4:polymer-resource-pack:0.15.1+1.21.11")
+	modImplementation include("eu.pb4:polymer-autohost:0.15.1+1.21.11")
 }
 
 processResources {

@@ -1,5 +1,6 @@
 package justfatlard.magic_egg;
 
+import eu.pb4.polymer.core.api.entity.PolymerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -10,12 +11,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import xyz.nucleoid.packettweaker.PacketContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
-public class MagicEggEntity extends ThrownItemEntity {
+public class MagicEggEntity extends ThrownItemEntity implements PolymerEntity {
 	public MagicEggEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
 		super(entityType, world);
 	}
@@ -33,11 +35,16 @@ public class MagicEggEntity extends ThrownItemEntity {
 		return Main.MAGIC_EGG_ITEM;
 	}
 
+	@Override
+	public EntityType<?> getPolymerEntityType(PacketContext context) {
+		// Appear as a thrown ender pearl to vanilla clients
+		return EntityType.ENDER_PEARL;
+	}
+
 	private void spawnParticles(int count) {
 		ItemStack itemStack = this.getStack();
-		World world = this.getEntityWorld();
 
-		if (world instanceof ServerWorld serverWorld) {
+		if (this.getEntityWorld() instanceof ServerWorld serverWorld) {
 			for (int i = 0; i < count; i++) {
 				serverWorld.spawnParticles(
 					new ItemStackParticleEffect(ParticleTypes.ITEM, itemStack),
@@ -58,7 +65,6 @@ public class MagicEggEntity extends ThrownItemEntity {
 	public void handleStatus(byte status) {
 		if (status == 3) {
 			// Server-side particles are handled in onCollision via spawnParticles
-			// This method is called on the client but we don't need client-side particles
 		}
 	}
 
