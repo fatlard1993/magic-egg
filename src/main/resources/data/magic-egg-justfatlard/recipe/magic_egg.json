@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "LEL",
+        "EGE",
+        "LEL"
+    ],
+    "key": {
+        "L": "minecraft:lapis_lazuli",
+        "E": "minecraft:ender_pearl",
+        "G": "minecraft:egg"
+    },
+    "result": {
+        "id": "magic-egg-justfatlard:magic_egg",
+        "count": 1
+    }
+}

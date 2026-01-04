@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "magic-egg-justfatlard",
+  "version": "${version}",
+  "name": "Magic Egg",
+  "description": "A throwable egg that converts entities into spawn eggs",
+  "authors": [
+    "justfatlard"
+  ],
+  "contact": {
+    "sources": ""
+  },
+  "license": "MIT",
+  "icon": "assets/magic-egg-justfatlard/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "justfatlard.magic_egg.Main"
+    ],
+    "client": [
+      "justfatlard.magic_egg.ClientMain"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "fabric-api": "*",
+    "minecraft": "~1.21.11",
+    "java": ">=21"
+  }
+}
