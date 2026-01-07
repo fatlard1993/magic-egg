@@ -2,17 +2,24 @@
 
 A Fabric mod for Minecraft 1.21.1 that adds a Magic Egg - a throwable item that converts mobs into their spawn eggs.
 
-![Minecraft 1.21.1](https://img.shields.io/badge/Minecraft-1.21.1-green)
+![Minecraft 1.21.11](https://img.shields.io/badge/Minecraft-1.21.11-green)
 ![Fabric](https://img.shields.io/badge/Mod%20Loader-Fabric-blue)
+![Server-Side](https://img.shields.io/badge/Server--Side-Compatible-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
+
+## Screenshots
+
+![Magic Egg](img.png)
+![Magic Egg Usage](img2.png)
+![Magic Egg Recipe](img3.png)
 
 ## Features
 
-- **Magic Egg**: A throwable projectile that instantly converts entities into spawn eggs
-  - Throw it at any mob to remove them and drop their spawn egg
-  - Works on any entity that has a spawn egg in vanilla Minecraft
-  - Does NOT work on players (for obvious reasons)
-  - Stacks up to 16
+**Magic Egg**: A throwable projectile that instantly converts entities into spawn eggs
+- Throw it at any mob to remove them and drop their spawn egg
+- Works on any entity that has a spawn egg in vanilla Minecraft
+- Does NOT work on players (for obvious reasons)
+- Stacks up to 16
 
 ## Crafting Recipe
 

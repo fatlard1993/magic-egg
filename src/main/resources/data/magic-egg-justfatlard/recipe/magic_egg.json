@@ -8,7 +8,7 @@
     "key": {
         "L": "minecraft:lapis_lazuli",
         "E": "minecraft:ender_pearl",
-        "G": "minecraft:egg"
+        "G": "#magic-egg-justfatlard:eggs"
     },
     "result": {
         "id": "magic-egg-justfatlard:magic_egg",
