@@ -1,0 +1,22 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:cooked_chicken"
+		},
+		"title": {
+			"translate": "advancement.magic-egg-justfatlard.lava_chicken.title"
+		},
+		"description": {
+			"translate": "advancement.magic-egg-justfatlard.lava_chicken.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true
+	},
+	"parent": "magic-egg-justfatlard:root",
+	"criteria": {
+		"lava_chicken": {
+			"trigger": "magic-egg-justfatlard/lava_chicken"
+		}
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"display": {
+		"icon": {
+			"id": "minecraft:pig_spawn_egg"
+		},
+		"title": {
+			"translate": "advancement.magic-egg-justfatlard.first_capture.title"
+		},
+		"description": {
+			"translate": "advancement.magic-egg-justfatlard.first_capture.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true
+	},
+	"parent": "magic-egg-justfatlard:root",
+	"criteria": {
+		"captured_mob": {
+			"trigger": "magic-egg-justfatlard/mob_capture"
+		}
+	}
+}

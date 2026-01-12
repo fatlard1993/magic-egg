@@ -1,3 +1,9 @@
 {
-    "item.magic-egg-justfatlard.magic_egg": "Magic Egg"
+	"item.magic-egg-justfatlard.magic_egg": "Magic Egg",
+	"advancement.magic-egg-justfatlard.root.title": "Magic Egg",
+	"advancement.magic-egg-justfatlard.root.description": "Obtain a Magic Egg",
+	"advancement.magic-egg-justfatlard.first_capture.title": "Gotta Catch 'Em All",
+	"advancement.magic-egg-justfatlard.first_capture.description": "Capture your first mob with a Magic Egg",
+	"advancement.magic-egg-justfatlard.lava_chicken.title": "Steve's Lava Chicken Delivery",
+	"advancement.magic-egg-justfatlard.lava_chicken.description": "Witness a fiery chicken delivery gone wrong"
 }

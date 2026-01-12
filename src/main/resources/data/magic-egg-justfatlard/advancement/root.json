@@ -1,0 +1,28 @@
+{
+	"display": {
+		"icon": {
+			"id": "magic-egg-justfatlard:magic_egg"
+		},
+		"title": {
+			"translate": "advancement.magic-egg-justfatlard.root.title"
+		},
+		"description": {
+			"translate": "advancement.magic-egg-justfatlard.root.description"
+		},
+		"background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+		"show_toast": false,
+		"announce_to_chat": false
+	},
+	"criteria": {
+		"has_magic_egg": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": "magic-egg-justfatlard:magic_egg"
+					}
+				]
+			}
+		}
+	}
+}

@@ -4,6 +4,7 @@ import eu.pb4.polymer.core.api.entity.PolymerEntityUtils;
 import eu.pb4.polymer.core.api.item.PolymerItemGroupUtils;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.Item;
@@ -36,6 +37,16 @@ public class Main implements ModInitializer {
 		new Item.Settings()
 			.registryKey(MAGIC_EGG_ITEM_KEY)
 			.maxCount(16)
+	);
+
+	public static final MobCaptureCriterion MOB_CAPTURE_CRITERION = Criteria.register(
+		MOD_ID + "/mob_capture",
+		new MobCaptureCriterion()
+	);
+
+	public static final MobCaptureCriterion LAVA_CHICKEN_CRITERION = Criteria.register(
+		MOD_ID + "/lava_chicken",
+		new MobCaptureCriterion()
 	);
 
 	@Override
