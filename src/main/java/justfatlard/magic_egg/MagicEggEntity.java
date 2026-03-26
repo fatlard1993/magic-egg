@@ -15,6 +15,7 @@ import net.minecraft.particle.ParticleTypes;
 import xyz.nucleoid.packettweaker.PacketContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.entity.SpawnReason;
@@ -30,6 +31,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MagicEggEntity extends ThrownItemEntity implements PolymerEntity {
+	private static final List<RegistryKey<ChickenVariant>> CHICKEN_VARIANTS = List.of(
+		ChickenVariants.TEMPERATE,
+		ChickenVariants.WARM,
+		ChickenVariants.COLD
+	);
+
 	public MagicEggEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
 		super(entityType, world);
 	}
@@ -82,14 +89,14 @@ public class MagicEggEntity extends ThrownItemEntity implements PolymerEntity {
 
 	@Override
 	protected void onEntityHit(EntityHitResult entityHitResult) {
-		super.onEntityHit(entityHitResult);
-
 		Entity hitEntity = entityHitResult.getEntity();
 
 		// Don't convert players or other magic egg projectiles
 		if (hitEntity instanceof PlayerEntity || hitEntity instanceof MagicEggEntity) {
 			return;
 		}
+
+		super.onEntityHit(entityHitResult);
 
 		World world = this.getEntityWorld();
 		if (world instanceof ServerWorld serverWorld) {
@@ -148,19 +155,13 @@ public class MagicEggEntity extends ThrownItemEntity implements PolymerEntity {
 		}
 	}
 
-	private static final net.minecraft.registry.RegistryKey<ChickenVariant>[] CHICKEN_VARIANTS = new net.minecraft.registry.RegistryKey[] {
-		ChickenVariants.TEMPERATE,
-		ChickenVariants.WARM,
-		ChickenVariants.COLD
-	};
-
 	private void spawnChicken(ServerWorld serverWorld, boolean onFire) {
 		ChickenEntity chicken = EntityType.CHICKEN.create(serverWorld, SpawnReason.TRIGGERED);
 		if (chicken != null) {
 			chicken.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
 
 			// Random chicken variant (temperate/warm/cold)
-			var variantKey = CHICKEN_VARIANTS[this.random.nextInt(CHICKEN_VARIANTS.length)];
+			var variantKey = CHICKEN_VARIANTS.get(this.random.nextInt(CHICKEN_VARIANTS.size()));
 			serverWorld.getRegistryManager()
 				.getOptional(RegistryKeys.CHICKEN_VARIANT)
 				.flatMap(registry -> registry.getOptional(variantKey))

@@ -16,11 +16,18 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main implements ModInitializer {
 	public static final String MOD_ID = "magic-egg-justfatlard";
+	private static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static final Identifier MAGIC_EGG_ID = Identifier.of(MOD_ID, "magic_egg");
+
+	// These IDs must match the "trigger" fields in the advancement JSON files
+	public static final String MOB_CAPTURE_TRIGGER_ID = MOD_ID + "/mob_capture";
+	public static final String LAVA_CHICKEN_TRIGGER_ID = MOD_ID + "/lava_chicken";
 
 	public static final RegistryKey<Item> MAGIC_EGG_ITEM_KEY = RegistryKey.of(RegistryKeys.ITEM, MAGIC_EGG_ID);
 
@@ -40,12 +47,12 @@ public class Main implements ModInitializer {
 	);
 
 	public static final MobCaptureCriterion MOB_CAPTURE_CRITERION = Criteria.register(
-		MOD_ID + "/mob_capture",
+		MOB_CAPTURE_TRIGGER_ID,
 		new MobCaptureCriterion()
 	);
 
 	public static final MobCaptureCriterion LAVA_CHICKEN_CRITERION = Criteria.register(
-		MOD_ID + "/lava_chicken",
+		LAVA_CHICKEN_TRIGGER_ID,
 		new MobCaptureCriterion()
 	);
 
@@ -72,6 +79,6 @@ public class Main implements ModInitializer {
 			.build();
 		PolymerItemGroupUtils.registerPolymerItemGroup(Identifier.of(MOD_ID, "magic_egg"), magicEggGroup);
 
-		System.out.println("[magic-egg] Loaded Magic Egg mod (server-side with Polymer)");
+		LOGGER.info("Loaded Magic Egg mod (server-side with Polymer)");
 	}
 }

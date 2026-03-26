@@ -1,6 +1,6 @@
 # Magic Egg
 
-A Fabric mod for Minecraft 1.21.1 that adds a Magic Egg - a throwable item that converts mobs into their spawn eggs.
+A Fabric mod for Minecraft 1.21.11 that adds a Magic Egg - a throwable item that converts mobs into their spawn eggs.
 
 ![Minecraft 1.21.11](https://img.shields.io/badge/Minecraft-1.21.11-green)
 ![Fabric](https://img.shields.io/badge/Mod%20Loader-Fabric-blue)
@@ -39,14 +39,14 @@ L E L
 
 ## Installation
 
-1. Install [Fabric Loader](https://fabricmc.net/use/) for Minecraft 1.21.1
+1. Install [Fabric Loader](https://fabricmc.net/use/) for Minecraft 1.21.11
 2. Download and install [Fabric API](https://modrinth.com/mod/fabric-api)
 3. Download the latest release of Magic Egg
 4. Place the jar file in your `mods` folder
 
 ## Requirements
 
-- Minecraft 1.21.1
+- Minecraft 1.21.11
 - Fabric Loader 0.18.0+
 - Fabric API
 
