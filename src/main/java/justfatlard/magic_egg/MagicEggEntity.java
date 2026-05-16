@@ -1,52 +1,49 @@
 package justfatlard.magic_egg;
 
-import eu.pb4.polymer.core.api.entity.PolymerEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.particle.ItemStackParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import xyz.nucleoid.packettweaker.PacketContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.entity.passive.ChickenVariant;
-import net.minecraft.entity.passive.ChickenVariants;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.world.World;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.chicken.Chicken;
+import net.minecraft.world.entity.animal.chicken.ChickenVariant;
+import net.minecraft.world.entity.animal.chicken.ChickenVariants;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MagicEggEntity extends ThrownItemEntity implements PolymerEntity {
-	private static final List<RegistryKey<ChickenVariant>> CHICKEN_VARIANTS = List.of(
+public class MagicEggEntity extends ThrowableItemProjectile {
+	private static final List<ResourceKey<ChickenVariant>> CHICKEN_VARIANTS = List.of(
 		ChickenVariants.TEMPERATE,
 		ChickenVariants.WARM,
 		ChickenVariants.COLD
 	);
 
-	public MagicEggEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
+	public MagicEggEntity(EntityType<? extends ThrowableItemProjectile> entityType, Level world) {
 		super(entityType, world);
 	}
 
-	public MagicEggEntity(World world, LivingEntity owner) {
-		super(Main.MAGIC_EGG_ENTITY_TYPE, owner, world, new ItemStack(Main.MAGIC_EGG_ITEM));
+	public MagicEggEntity(Level world, LivingEntity owner, ItemStack stack) {
+		super(Main.MAGIC_EGG_ENTITY_TYPE, owner, world, stack);
 	}
 
-	public MagicEggEntity(World world, double x, double y, double z) {
-		super(Main.MAGIC_EGG_ENTITY_TYPE, x, y, z, world, new ItemStack(Main.MAGIC_EGG_ITEM));
+	public MagicEggEntity(Level world, double x, double y, double z, ItemStack stack) {
+		super(Main.MAGIC_EGG_ENTITY_TYPE, x, y, z, world, stack);
 	}
 
 	@Override
@@ -54,19 +51,13 @@ public class MagicEggEntity extends ThrownItemEntity implements PolymerEntity {
 		return Main.MAGIC_EGG_ITEM;
 	}
 
-	@Override
-	public EntityType<?> getPolymerEntityType(PacketContext context) {
-		// Appear as a thrown ender pearl to vanilla clients
-		return EntityType.ENDER_PEARL;
-	}
-
 	private void spawnParticles(int count) {
-		ItemStack itemStack = this.getStack();
+		ItemStack itemStack = this.getItem();
 
-		if (this.getEntityWorld() instanceof ServerWorld serverWorld) {
+		if (this.level() instanceof ServerLevel serverWorld) {
 			for (int i = 0; i < count; i++) {
-				serverWorld.spawnParticles(
-					new ItemStackParticleEffect(ParticleTypes.ITEM, itemStack),
+				serverWorld.sendParticles(
+					new ItemParticleOption(ParticleTypes.ITEM, itemStack.getItem()),
 					this.getX(),
 					this.getY(),
 					this.getZ(),
@@ -81,42 +72,42 @@ public class MagicEggEntity extends ThrownItemEntity implements PolymerEntity {
 	}
 
 	@Override
-	public void handleStatus(byte status) {
+	public void handleEntityEvent(byte status) {
 		if (status == 3) {
-			// Server-side particles are handled in onCollision via spawnParticles
+			// Server-side particles are handled in onHit via spawnParticles
 		}
 	}
 
 	@Override
-	protected void onEntityHit(EntityHitResult entityHitResult) {
+	protected void onHitEntity(EntityHitResult entityHitResult) {
 		Entity hitEntity = entityHitResult.getEntity();
 
 		// Don't convert players or other magic egg projectiles
-		if (hitEntity instanceof PlayerEntity || hitEntity instanceof MagicEggEntity) {
+		if (hitEntity instanceof Player || hitEntity instanceof MagicEggEntity) {
 			return;
 		}
 
-		super.onEntityHit(entityHitResult);
+		super.onHitEntity(entityHitResult);
 
-		World world = this.getEntityWorld();
-		if (world instanceof ServerWorld serverWorld) {
+		Level world = this.level();
+		if (world instanceof ServerLevel serverWorld) {
 			EntityType<?> entityType = hitEntity.getType();
 
 			// Try to get the spawn egg for this entity type
-			SpawnEggItem spawnEggItem = SpawnEggItem.forEntity(entityType);
+			var spawnEggHolder = SpawnEggItem.byId(entityType);
 
-			if (spawnEggItem != null) {
+			if (spawnEggHolder.isPresent()) {
 				// Create the spawn egg item stack
-				ItemStack spawnEggStack = new ItemStack(spawnEggItem);
+				ItemStack spawnEggStack = new ItemStack(spawnEggHolder.get());
 
 				// Drop the spawn egg at the entity's location
-				hitEntity.dropStack(serverWorld, spawnEggStack);
+				hitEntity.spawnAtLocation(serverWorld, spawnEggStack);
 
 				// Remove the entity (discard it from the world)
 				hitEntity.discard();
 
 				// Grant advancement to the player who threw the egg
-				if (this.getOwner() instanceof ServerPlayerEntity player) {
+				if (this.getOwner() instanceof ServerPlayer player) {
 					Main.MOB_CAPTURE_CRITERION.trigger(player);
 				}
 			}
@@ -125,11 +116,11 @@ public class MagicEggEntity extends ThrownItemEntity implements PolymerEntity {
 	}
 
 	@Override
-	protected void onCollision(HitResult hitResult) {
-		super.onCollision(hitResult);
+	protected void onHit(HitResult hitResult) {
+		super.onHit(hitResult);
 
-		World world = this.getEntityWorld();
-		if (world instanceof ServerWorld serverWorld) {
+		Level world = this.level();
+		if (world instanceof ServerLevel serverWorld) {
 			// Spawn particles on collision
 			spawnParticles(8);
 
@@ -155,42 +146,42 @@ public class MagicEggEntity extends ThrownItemEntity implements PolymerEntity {
 		}
 	}
 
-	private void spawnChicken(ServerWorld serverWorld, boolean onFire) {
-		ChickenEntity chicken = EntityType.CHICKEN.create(serverWorld, SpawnReason.TRIGGERED);
+	private void spawnChicken(ServerLevel serverWorld, boolean onFire) {
+		Chicken chicken = EntityType.CHICKEN.create(serverWorld, EntitySpawnReason.TRIGGERED);
 		if (chicken != null) {
-			chicken.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
+			chicken.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
 			// Random chicken variant (temperate/warm/cold)
 			var variantKey = CHICKEN_VARIANTS.get(this.random.nextInt(CHICKEN_VARIANTS.size()));
-			serverWorld.getRegistryManager()
-				.getOptional(RegistryKeys.CHICKEN_VARIANT)
-				.flatMap(registry -> registry.getOptional(variantKey))
+			serverWorld.registryAccess()
+				.lookupOrThrow(Registries.CHICKEN_VARIANT)
+				.get(variantKey)
 				.ifPresent(chicken::setVariant);
 
 			if (onFire) {
 				// ~5 seconds of fire - enough to kill the chicken
-				chicken.setOnFireForTicks(100);
+				chicken.igniteForTicks(100);
 				// Grant achievement to the player who threw the egg
-				if (this.getOwner() instanceof ServerPlayerEntity player) {
+				if (this.getOwner() instanceof ServerPlayer player) {
 					Main.LAVA_CHICKEN_CRITERION.trigger(player);
 				}
 			}
-			serverWorld.spawnEntity(chicken);
+			serverWorld.addFreshEntity(chicken);
 		}
 	}
 
-	private void spawnRandomMob(ServerWorld serverWorld) {
+	private void spawnRandomMob(ServerLevel serverWorld) {
 		// Get all entity types that have spawn eggs (meaning they're spawnable mobs)
-		List<EntityType<?>> spawnableTypes = Registries.ENTITY_TYPE.stream()
-			.filter(type -> SpawnEggItem.forEntity(type) != null)
+		List<EntityType<?>> spawnableTypes = BuiltInRegistries.ENTITY_TYPE.stream()
+			.filter(type -> SpawnEggItem.byId(type).isPresent())
 			.collect(Collectors.toList());
 
 		if (!spawnableTypes.isEmpty()) {
 			EntityType<?> randomType = spawnableTypes.get(this.random.nextInt(spawnableTypes.size()));
-			Entity entity = randomType.create(serverWorld, SpawnReason.TRIGGERED);
+			Entity entity = randomType.create(serverWorld, EntitySpawnReason.TRIGGERED);
 			if (entity != null) {
-				entity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
-				serverWorld.spawnEntity(entity);
+				entity.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+				serverWorld.addFreshEntity(entity);
 			}
 		}
 	}
