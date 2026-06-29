@@ -3,7 +3,6 @@ package justfatlard.magic_egg;
 import justfatlard.pandorical.api.PandoricalApi;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -53,13 +52,15 @@ public class Main implements ModInitializer {
 			.stacksTo(16)
 	);
 
-	public static final MobCaptureCriterion MOB_CAPTURE_CRITERION = CriteriaTriggers.register(
-		MOB_CAPTURE_TRIGGER_ID,
+	public static final MobCaptureCriterion MOB_CAPTURE_CRITERION = Registry.register(
+		BuiltInRegistries.TRIGGER_TYPES,
+		Identifier.fromNamespaceAndPath(MOD_ID, "mob_capture"),
 		new MobCaptureCriterion()
 	);
 
-	public static final MobCaptureCriterion LAVA_CHICKEN_CRITERION = CriteriaTriggers.register(
-		LAVA_CHICKEN_TRIGGER_ID,
+	public static final MobCaptureCriterion LAVA_CHICKEN_CRITERION = Registry.register(
+		BuiltInRegistries.TRIGGER_TYPES,
+		Identifier.fromNamespaceAndPath(MOD_ID, "lava_chicken"),
 		new MobCaptureCriterion()
 	);
 
@@ -76,6 +77,7 @@ public class Main implements ModInitializer {
 
 		// Register entity and item
 		Registry.register(BuiltInRegistries.ENTITY_TYPE, MAGIC_EGG_ID, MAGIC_EGG_ENTITY_TYPE);
+		PandoricalApi.registerEntityRenderer(MAGIC_EGG_ENTITY_TYPE, "thrown_item");
 		Registry.register(BuiltInRegistries.ITEM, MAGIC_EGG_ID, MAGIC_EGG_ITEM);
 
 		// Creative mode tab

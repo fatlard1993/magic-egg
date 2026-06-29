@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.chicken.Chicken;
 import net.minecraft.world.entity.animal.chicken.ChickenVariant;
@@ -147,7 +148,7 @@ public class MagicEggEntity extends ThrowableItemProjectile {
 	}
 
 	private void spawnChicken(ServerLevel serverWorld, boolean onFire) {
-		Chicken chicken = EntityType.CHICKEN.create(serverWorld, EntitySpawnReason.TRIGGERED);
+		Chicken chicken = EntityTypes.CHICKEN.create(serverWorld, EntitySpawnReason.TRIGGERED);
 		if (chicken != null) {
 			chicken.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
