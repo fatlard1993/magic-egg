@@ -16,7 +16,7 @@
 	"parent": "magic-egg-justfatlard:root",
 	"criteria": {
 		"captured_mob": {
-			"trigger": "magic-egg-justfatlard/mob_capture"
+			"trigger": "magic-egg-justfatlard:mob_capture"
 		}
 	}
 }

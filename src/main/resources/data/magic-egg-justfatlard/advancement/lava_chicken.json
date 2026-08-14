@@ -16,7 +16,7 @@
 	"parent": "magic-egg-justfatlard:root",
 	"criteria": {
 		"lava_chicken": {
-			"trigger": "magic-egg-justfatlard/lava_chicken"
+			"trigger": "magic-egg-justfatlard:lava_chicken"
 		}
 	}
 }

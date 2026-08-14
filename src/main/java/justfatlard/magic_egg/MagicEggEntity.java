@@ -94,25 +94,17 @@ public class MagicEggEntity extends ThrowableItemProjectile {
 		if (world instanceof ServerLevel serverWorld) {
 			EntityType<?> entityType = hitEntity.getType();
 
-			// Try to get the spawn egg for this entity type
 			var spawnEggHolder = SpawnEggItem.byId(entityType);
 
 			if (spawnEggHolder.isPresent()) {
-				// Create the spawn egg item stack
 				ItemStack spawnEggStack = new ItemStack(spawnEggHolder.get());
-
-				// Drop the spawn egg at the entity's location
 				hitEntity.spawnAtLocation(serverWorld, spawnEggStack);
-
-				// Remove the entity (discard it from the world)
 				hitEntity.discard();
 
-				// Grant advancement to the player who threw the egg
 				if (this.getOwner() instanceof ServerPlayer player) {
 					Main.MOB_CAPTURE_CRITERION.trigger(player);
 				}
 			}
-			// If no spawn egg exists for this entity, just do nothing special
 		}
 	}
 
@@ -122,7 +114,6 @@ public class MagicEggEntity extends ThrowableItemProjectile {
 
 		Level world = this.level();
 		if (world instanceof ServerLevel serverWorld) {
-			// Spawn particles on collision
 			spawnParticles(8);
 
 			// If we missed (hit a block, not an entity), small chance to spawn something
@@ -162,7 +153,6 @@ public class MagicEggEntity extends ThrowableItemProjectile {
 			if (onFire) {
 				// ~5 seconds of fire - enough to kill the chicken
 				chicken.igniteForTicks(100);
-				// Grant achievement to the player who threw the egg
 				if (this.getOwner() instanceof ServerPlayer player) {
 					Main.LAVA_CHICKEN_CRITERION.trigger(player);
 				}
@@ -172,7 +162,6 @@ public class MagicEggEntity extends ThrowableItemProjectile {
 	}
 
 	private void spawnRandomMob(ServerLevel serverWorld) {
-		// Get all entity types that have spawn eggs (meaning they're spawnable mobs)
 		List<EntityType<?>> spawnableTypes = BuiltInRegistries.ENTITY_TYPE.stream()
 			.filter(type -> SpawnEggItem.byId(type).isPresent())
 			.collect(Collectors.toList());
