@@ -52,7 +52,10 @@ Install alongside its declared dependencies (see `fabric.mod.json`), including P
 
 ## Building from Source
 
+Magic Egg builds against Pandorical's live source, not a published artifact: `settings.gradle` includes `../pandorical`. Clone both side by side or the build fails before it starts.
+
 ```bash
+git clone https://github.com/fatlard1993/pandorical.git
 git clone https://github.com/fatlard1993/magic-egg.git
 cd magic-egg
 ./gradlew build
