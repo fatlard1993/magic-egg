@@ -34,12 +34,6 @@ L E L
 | E | Ender Pearl |
 | G | Egg |
 
-## Requirements
-
-- Targets the Minecraft, Fabric Loader, and Fabric API versions declared in this mod's `gradle.properties`. Check there for the exact currently-supported version
-- Java version as declared in `fabric.mod.json`'s `depends` block
-- Pandorical (see below)
-
 ## Pandorical
 
 Magic Egg registers its own assets through Pandorical's content sync, and uses Pandorical's `thrown_item` entity renderer to display the flying egg projectile on Pandorical-enabled clients.
@@ -48,7 +42,7 @@ Magic Egg registers its own assets through Pandorical's content sync, and uses P
 
 ## Installation
 
-Install alongside its declared dependencies (see `fabric.mod.json`), including Pandorical on connecting clients.
+Install server-side alongside its declared dependencies (see `fabric.mod.json`); connecting clients need only Pandorical. Version targets live in `gradle.properties` (Minecraft, loader, Fabric API) and `fabric.mod.json` (Java).
 
 ## Building from Source
 
@@ -65,4 +59,4 @@ The built jar will be in `build/libs/`.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT, see [LICENSE](LICENSE).
