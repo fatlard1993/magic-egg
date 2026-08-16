@@ -1,5 +1,6 @@
 package justfatlard.magic_egg;
 
+import justfatlard.pandorical.api.ItemRegistration;
 import justfatlard.pandorical.api.PandoricalApi;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
@@ -72,6 +73,9 @@ public class Main implements ModInitializer {
 	public void onInitialize() {
 		// Register with Pandorical if available
 		if (PandoricalApi.isAvailable()) {
+			PandoricalApi.content().registerItem(MOD_ID + ":magic_egg", new ItemRegistration()
+				.model(MOD_ID + ":item/magic_egg")
+				.maxStackSize(16));
 			PandoricalApi.content().registerModAssets(MOD_ID);
 		}
 
