@@ -18,6 +18,16 @@ A Fabric mod that adds a Magic Egg - a throwable item that converts mobs into th
 - If it misses (hits a block instead of a mob), there's a small chance it spawns something instead: usually a chicken, occasionally a random mob, and rarely a chicken on fire (a "lava chicken")
 - Grants advancements for your first capture and for producing a lava chicken
 
+## Learning It
+
+The recipe is four lapis, four ender pearls and an egg, in a particular arrangement, and nobody is going to arrive at that by experiment.
+
+So with [village-quests](https://github.com/justfatlard/village-quests) installed, a cleric who trusts you will describe it and ask you to bring the pieces. Nothing is taken: you gathered exactly one magic egg's worth of materials, and the payoff is being able to make one on the walk home.
+
+Then they ask you to throw it at something and come back and tell them, because knowing a recipe is not the same as knowing what a thing does. That second half only appears for someone already taught and not yet shown, so the two read as one conversation continued.
+
+The integration is optional and guarded: without village-quests the mod behaves exactly as before.
+
 ## Crafting Recipe
 
 Surround an egg with alternating lapis lazuli and ender pearls:

@@ -103,6 +103,8 @@ public class MagicEggEntity extends ThrowableItemProjectile {
 
 				if (this.getOwner() instanceof ServerPlayer player) {
 					Main.MOB_CAPTURE_CRITERION.trigger(player);
+					// Same moment, second audience: a villager asked to be told.
+					justfatlard.magic_egg.quest.EggLore.recordCatch(serverWorld, player.getUUID());
 				}
 			}
 		}

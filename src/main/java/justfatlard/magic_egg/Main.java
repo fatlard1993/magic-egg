@@ -71,6 +71,12 @@ public class Main implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		// Guarded class load: EggQuestRegistration names village-quests types
+		// directly, so it must not be touched when that mod is absent.
+		if (net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("village-quests-justfatlard")) {
+			justfatlard.magic_egg.integration.EggQuestRegistration.register();
+		}
+
 		// Register with Pandorical if available
 		if (PandoricalApi.isAvailable()) {
 			PandoricalApi.content().registerItem(MOD_ID + ":magic_egg", new ItemRegistration()
