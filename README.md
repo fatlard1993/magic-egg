@@ -22,7 +22,7 @@ A Fabric mod that adds a Magic Egg - a throwable item that converts mobs into th
 
 The recipe is four lapis, four ender pearls and an egg, in a particular arrangement, and nobody is going to arrive at that by experiment.
 
-So with [village-quests](https://github.com/justfatlard/village-quests) installed, a cleric who trusts you will describe it and ask you to bring the pieces. Nothing is taken: you gathered exactly one magic egg's worth of materials, and the payoff is being able to make one on the walk home.
+So with [village-quests](https://github.com/fatlard1993/village-quests) installed, a cleric who trusts you will describe it and ask you to bring the pieces. Nothing is taken: you gathered exactly one magic egg's worth of materials, and the payoff is being able to make one on the walk home.
 
 Then they ask you to throw it at something and come back and tell them, because knowing a recipe is not the same as knowing what a thing does. That second half only appears for someone already taught and not yet shown, so the two read as one conversation continued.
 
