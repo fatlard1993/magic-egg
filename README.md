@@ -15,7 +15,7 @@ A Fabric mod that adds a Magic Egg - a throwable item that converts mobs into th
 - Works on any entity that has a spawn egg in vanilla Minecraft
 - Does NOT work on players (for obvious reasons)
 - Stacks up to 16
-- If it misses (hits a block instead of a mob), there's a small chance it spawns something instead: usually a chicken, occasionally a random mob, and rarely a chicken on fire (a "lava chicken")
+- If it misses (hits a block instead of a mob), there's a one in four chance it spawns something instead: usually a chicken, otherwise (one time in eight each) a random mob or a chicken on fire (a "lava chicken")
 - Grants advancements for your first capture and for producing a lava chicken
 
 ## Learning It
@@ -42,11 +42,11 @@ L E L
 |--------|------|
 | L | Lapis Lazuli |
 | E | Ender Pearl |
-| G | Egg |
+| G | Egg (white, blue or brown) |
 
 ## Pandorical
 
-Magic Egg registers its own assets through Pandorical's content sync, and uses Pandorical's `thrown_item` entity renderer to display the flying egg projectile on Pandorical-enabled clients.
+Pandorical is required on the server. Magic Egg registers its own assets through Pandorical's content sync, and uses Pandorical's `thrown_item` entity renderer to display the flying egg projectile on Pandorical-enabled clients.
 
 **The Pandorical mod must be installed client-side** to see the thrown egg rendered in flight.
 

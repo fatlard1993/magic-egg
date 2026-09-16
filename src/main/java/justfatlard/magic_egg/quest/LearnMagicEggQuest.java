@@ -61,7 +61,7 @@ public class LearnMagicEggQuest extends VillagerQuest {
 	public boolean checkCompletion(ServerPlayer player) {
 		return count(player, Items.LAPIS_LAZULI) >= LAPIS
 			&& count(player, Items.ENDER_PEARL) >= PEARLS
-			&& count(player, Items.EGG) >= 1;
+			&& count(player, Items.EGG) + count(player, Items.BLUE_EGG) + count(player, Items.BROWN_EGG) >= 1;
 	}
 
 	@Override
