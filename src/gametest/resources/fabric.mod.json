@@ -1,0 +1,18 @@
+{
+	"schemaVersion": 1,
+	"id": "magic-egg-gametest",
+	"version": "1.0.0",
+	"name": "Magic Egg smoke test",
+	"description": "Loads the mod, joins a world, and fails if anything on the way threw.",
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-client-gametest": [
+			"justfatlard.magic_egg.gametest.SmokeTest"
+		]
+	},
+	"depends": {
+		"magic-egg-justfatlard": "*",
+		"fabric-client-gametest-api-v1": "*"
+	}
+}

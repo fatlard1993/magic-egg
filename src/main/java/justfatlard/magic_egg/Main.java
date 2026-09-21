@@ -23,6 +23,7 @@ public class Main implements ModInitializer {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static final Identifier MAGIC_EGG_ID = Identifier.fromNamespaceAndPath(MOD_ID, "magic_egg");
+	public static final Identifier ENDER_EGG_ID = Identifier.fromNamespaceAndPath(MOD_ID, "ender_egg");
 
 	// These IDs must match the "trigger" fields in the advancement JSON files
 	public static final String MOB_CAPTURE_TRIGGER_ID = MOD_ID + "/mob_capture";
@@ -37,6 +38,7 @@ public class Main implements ModInitializer {
 	}
 
 	public static final ResourceKey<Item> MAGIC_EGG_ITEM_KEY = itemKeyOf("magic_egg");
+	public static final ResourceKey<Item> ENDER_EGG_ITEM_KEY = itemKeyOf("ender_egg");
 
 	public static final ResourceKey<EntityType<?>> MAGIC_EGG_ENTITY_KEY = entityKeyOf("magic_egg");
 
@@ -50,6 +52,15 @@ public class Main implements ModInitializer {
 	public static final MagicEggItem MAGIC_EGG_ITEM = new MagicEggItem(
 		new Item.Properties()
 			.setId(MAGIC_EGG_ITEM_KEY)
+			.stacksTo(16)
+	);
+
+	// Same item class and the same projectile: which of the two was thrown is read
+	// back off the flying stack, so the pair needs no second entity type and no
+	// second renderer.
+	public static final MagicEggItem ENDER_EGG_ITEM = new MagicEggItem(
+		new Item.Properties()
+			.setId(ENDER_EGG_ITEM_KEY)
 			.stacksTo(16)
 	);
 
@@ -82,6 +93,9 @@ public class Main implements ModInitializer {
 			PandoricalApi.content().registerItem(MOD_ID + ":magic_egg", new ItemRegistration()
 				.model(MOD_ID + ":item/magic_egg")
 				.maxStackSize(16));
+			PandoricalApi.content().registerItem(MOD_ID + ":ender_egg", new ItemRegistration()
+				.model(MOD_ID + ":item/ender_egg")
+				.maxStackSize(16));
 			PandoricalApi.content().registerModAssets(MOD_ID);
 		}
 
@@ -89,6 +103,7 @@ public class Main implements ModInitializer {
 		Registry.register(BuiltInRegistries.ENTITY_TYPE, MAGIC_EGG_ID, MAGIC_EGG_ENTITY_TYPE);
 		PandoricalApi.registerEntityRenderer(MAGIC_EGG_ENTITY_TYPE, "thrown_item");
 		Registry.register(BuiltInRegistries.ITEM, MAGIC_EGG_ID, MAGIC_EGG_ITEM);
+		Registry.register(BuiltInRegistries.ITEM, ENDER_EGG_ID, ENDER_EGG_ITEM);
 
 		// Creative mode tab
 		CreativeModeTab magicEggGroup = FabricCreativeModeTab.builder()
@@ -96,6 +111,7 @@ public class Main implements ModInitializer {
 			.icon(() -> new ItemStack(MAGIC_EGG_ITEM))
 			.displayItems((context, entries) -> {
 				entries.accept(new ItemStack(MAGIC_EGG_ITEM));
+				entries.accept(new ItemStack(ENDER_EGG_ITEM));
 			})
 			.build();
 		Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ITEM_GROUP_KEY, magicEggGroup);
