@@ -5,18 +5,26 @@
 	],
 	"versions": {
 		"2.1.0": [
-			"The Ender Egg: the same throw, except it keeps the animal instead of the species. The egg it drops carries that mob's own name, variant, saddle, health and everything it was holding, and is named after it so a box of them can be read at a glance.",
-			"Missing is worth more now: one throw in four does not break at all and can be picked up and thrown again, and a miss that hatches chickens can hatch a flock. The cleric's quest takes a blue or brown egg as well as a white one."
+			"The Ender Egg: the same throw, except it keeps the animal instead of the species.",
+			"The egg carries that mob's own name, variant, saddle, health and everything it held.",
+			"It is named after it, so a box of them can be read at a glance.",
+			"Missing is worth more: one throw in four does not break, and can be thrown again.",
+			"A miss that hatches chickens can hatch a flock.",
+			"The cleric's quest takes a blue or brown egg as well as a white one."
 		],
 		"2.0.0": [
-			"With village-quests installed, a cleric describes a recipe nobody would reach by experiment, lets you keep what you gathered, and afterwards asks you to tell them what it looked like when you threw one.",
-			"Every recipe brings the advancement that unlocks it, and advancements say their words instead of a key the client cannot resolve."
+			"With Village Quests installed, a cleric describes a recipe nobody would reach by experiment.",
+			"You keep what you gathered, and afterwards they ask what it looked like when you threw one.",
+			"Every recipe brings the advancement that unlocks it.",
+			"Advancements say their words instead of a key the client cannot resolve."
 		],
 		"1.1.1": [
-			"Advancements for your first capture and for producing a lava chicken, and a throw that misses now sometimes hatches something: usually a chicken, now and then a random mob or a chicken on fire."
+			"Advancements for your first capture and for producing a lava chicken.",
+			"A throw that misses sometimes hatches something: usually a chicken, sometimes worse."
 		],
 		"1.0.0": [
-			"The magic egg: throw it at a mob and take its spawn egg. Crafted from an egg, lapis lazuli and ender pearls, and it accepts blue and brown eggs as well as white."
+			"The magic egg: throw it at a mob and take its spawn egg.",
+			"Crafted from an egg, lapis lazuli and ender pearls. Blue and brown eggs work too."
 		]
 	}
 }
