@@ -47,8 +47,6 @@ Then they ask you to throw it at something and come back and tell them, because 
 
 The ender egg is not part of that conversation. It is a variation on a recipe you have already been taught, and finding it is left to you.
 
-The integration is optional and guarded: without village-quests the mod behaves exactly as before.
-
 ## Crafting Recipes
 
 A magic egg is an egg surrounded by alternating lapis lazuli and ender pearls. An ender egg is the same working with an eye of ender where the top pearl goes.
