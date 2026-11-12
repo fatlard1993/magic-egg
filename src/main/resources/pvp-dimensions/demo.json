@@ -1,0 +1,43 @@
+{
+  "demo": {
+    "name": "Magic Egg",
+    "icon": "magic-egg-justfatlard:magic_egg",
+    "about": [
+      "A throwable egg that turns whatever mob it hits into that mob's spawn egg, and the Ender Egg keeps the very mob, name and all.",
+      "Mobs are coming: throw eggs at them and collect their spawn eggs. A miss might come back to you, or hatch a flock of chickens."
+    ]
+  },
+  "pvp_preset": 1,
+  "needs": ["magic-egg-justfatlard"],
+  "preset": {
+    "name": "Magic Egg",
+    "icon": "magic-egg-justfatlard:magic_egg",
+    "pvp": false,
+    "game_mode": "survival",
+    "entry_kit": [
+      {"slot": 0, "item": {"id": "magic-egg-justfatlard:magic_egg", "count": 16}},
+      {"slot": 1, "item": {"id": "magic-egg-justfatlard:ender_egg", "count": 4}},
+      {"slot": 2, "item": {"id": "minecraft:stone_sword", "count": 1}},
+      {"slot": 3, "item": {"id": "minecraft:cooked_beef", "count": 8}},
+      {"slot": 38, "item": {"id": "minecraft:iron_chestplate", "count": 1}}
+    ],
+    "respawn_kit": "entry",
+    "goal": "time",
+    "mobs": "always",
+    "mob_rarity": "normal",
+    "mob_default": "off",
+    "mob_levels": {
+      "minecraft:zombie": "normal",
+      "minecraft:skeleton": "normal",
+      "minecraft:spider": "normal",
+      "minecraft:creeper": "rare",
+      "minecraft:witch": "rare"
+    },
+    "life": 15,
+    "size": 3,
+    "world": "overworld",
+    "shape": "natural",
+    "biome": "minecraft:plains",
+    "weather": "clear"
+  }
+}
